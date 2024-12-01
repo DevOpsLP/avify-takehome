@@ -9,7 +9,12 @@
       "dom",
       "es2017"
     ],
-    "outDir": "./build"
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "outDir": "./build",
+    "baseUrl": "./", // Base directory to resolve non-relative module names
+    "paths": {
+      "@/*": ["src/*"] // Map @/ to the src/ directory
+    }
   },
   "exclude": ["build"]
 }

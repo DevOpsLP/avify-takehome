@@ -20,6 +20,9 @@ module.exports = {
         publicPath: `http://${host}:${port}/`
     },
     resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src') // Map '@' to the 'src' directory
+        },
         mainFields: ['browser', 'module', 'main'],
         extensions: ['.js', '.json', '.jsx', '.ts', '.tsx']
     },
