@@ -5,26 +5,26 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const host = 'localhost';
 const port = 8080;
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
-    mode: 'development',
+    mode: isDevelopment ? 'development' : 'production',
     context: path.resolve(__dirname, 'src'),
     target: 'web',
     entry: {
-        app: [
-            './index.tsx'
-        ]
+        app: ['./index.tsx'],
     },
     output: {
         filename: '[name]-[contenthash:6].bundle.js',
         path: path.join(__dirname, './build/www'),
-        publicPath: `http://${host}:${port}/`
+        publicPath: isDevelopment ? `http://${host}:${port}/` : '/', // Dynamic publicPath
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'src') // Map '@' to the 'src' directory
+            '@': path.resolve(__dirname, 'src'), // Simplify imports with "@"
         },
         mainFields: ['browser', 'module', 'main'],
-        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     },
     module: {
         rules: [
@@ -35,30 +35,27 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: 'file-loader?name=img/[name]-[contenthash:6].[ext]',
-            }
-        ]
+            },
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'index.html'
+            template: 'index.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name]-[contenthash:6].css',
-            chunkFilename: '[id].css'
-        })
+            chunkFilename: '[id].css',
+        }),
     ],
     devServer: {
         port,
         host,
-        static: path.resolve(__dirname, 'src')
+        static: path.resolve(__dirname, 'src'),
     },
 };

@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --hot --progress"
+    "start": "webpack-dev-server --hot --progress",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",
