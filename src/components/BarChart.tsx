@@ -11,7 +11,7 @@ import {
   EnergySavingsLeaf,
 } from '@mui/icons-material';
 import CustomTooltip from './Tooltip';
-import { VerticalBarChartProps } from '../types';
+import { HorizontalBarChartProps } from '@/types';
 import { COLOR_MAP } from '@/utils/iconMap';
 
 // Map of icons for each fuel type
@@ -40,7 +40,7 @@ const renderCustomAxisTick = ({ x, y, payload }: { x: number; y: number; payload
 };
 
 // Vertical bar chart component
-const VerticalBarChart: React.FC<VerticalBarChartProps> = ({ data }) => {
+const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({ data }) => {
   const sortedData = [...data]
   .filter((item) => item.perc !== 0 || item.fuel.toLowerCase() === 'other') // Exclude "0%" except for "others"
   .sort((a, b) =>  a.perc - b.perc);
@@ -87,4 +87,4 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({ data }) => {
   );
 };
 
-export default VerticalBarChart;
+export default HorizontalBarChart;

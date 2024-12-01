@@ -14,7 +14,7 @@ export interface GenerationMix {
     data: GenerationMix[]; 
   }
   
-  export interface VerticalBarChartProps {
+  export interface HorizontalBarChartProps {
     data: GenerationMix[];
   }
   
